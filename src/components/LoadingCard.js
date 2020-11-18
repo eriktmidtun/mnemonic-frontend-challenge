@@ -1,54 +1,73 @@
 import React from "react";
 import {
-    Button,
-    CircularProgress,
-    Card,
-    CardActions,
-    CardContent,
-    CardMedia,
-    Typography,
-    makeStyles,
-  } from "@material-ui/core";
+  Button,
+  CircularProgress,
+  Card,
+  CardContent,
+  CardActions,
+  CardMedia,
+  Grid,
+  Typography,
+  makeStyles,
+} from "@material-ui/core";
 
 const useStyles = makeStyles({
   media: {
-    margin: "auto 0",
-    width: "auto",
-    height: "288px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    padding: "2em",
+    backgroundColor: "#f7f7f7",
   },
   grayedOut: {
     color: "#b3b3b3",
   },
+  button: {
+    fontWeight: "bold",
+  },
 });
 
-const LoadingCard = () => {
+const LoadingCard = ({ reversed }) => {
   const classes = useStyles();
+
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        <Typography variant="h5" component="h2" className={classes.grayedOut}>
-          Laster inn
-        </Typography>
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          component="p"
-          className={classes.grayedOut}
-        >
-          Beskrivelse kommer her
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button color="primary" disabled>
-          Link til ikon
-        </Button>
-      </CardActions>
-      <CardMedia className={classes.media}>
-        <CircularProgress size={"12rem"} />
+    <Card
+      component={Grid}
+      direction={"column" + (reversed ? "-reverse" : "")}
+      justify="flex-start"
+      alignItems="flex-start"
+    >
+      <CardMedia
+        className={classes.media}
+        component={Grid}
+        container
+        justify="center"
+        alignItems="center"
+      >
+        <CircularProgress size={"90px"} />
       </CardMedia>
+      <div>
+        <CardContent>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            className={classes.grayedOut}
+          >
+            Laster inn
+          </Typography>
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            className={classes.grayedOut}
+          >
+            Beskrivelse
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button color="default" disabled className={classes.button}>
+            Link
+          </Button>
+        </CardActions>
+      </div>
     </Card>
   );
 };

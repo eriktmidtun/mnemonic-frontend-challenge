@@ -1,14 +1,32 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import IconCard from "./IconCard";
 import LoadingCard from "./LoadingCard";
+import ErrorCard from "./ErrorCard";
 
-const CardList = ({ cardData }) => {
-  if (!cardData || Object.keys(cardData).length === 0) {
+const CardList = ({ cardData, loading, error, reversed }) => {
+  if (loading) {
     return (
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={4}>
           <LoadingCard />
+        </Grid>
+      </Grid>
+    );
+  }
+  if (error) {
+    const customErrorComponent = (
+      <Typography variant="h4" component="h2">
+        custom component
+      </Typography>
+    );
+    return (
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6} md={4}>
+          <ErrorCard
+            errorMessage={"custom error message"}
+            component={customErrorComponent}
+          />
         </Grid>
       </Grid>
     );
